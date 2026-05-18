@@ -1,4 +1,4 @@
 [submodule "LiteRT-LM"]
 	path = LiteRT-LM
-	url = https://github.com/arenblake/LiteRT-LM.git
-	branch = bonsai-engine
+	url = https://github.com/ZetiMente/LiteRT-LM.git
+	branch = multi-signature-vision
