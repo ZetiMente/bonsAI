@@ -36,6 +36,10 @@ bool ModelManager::init(const std::string& modelPath, bool useGpu, bool useVisio
         return false;
     }
 
+    // Raise the engine's max-sequence-length from the LiteRT-LM default (4096)
+    // up to the Gemma 4 E2B LiteRT-LM build's compiled limit (32K).
+    litert_lm_engine_settings_set_max_num_tokens(settings, 32768);
+
     m_engine = litert_lm_engine_create(settings);
     litert_lm_engine_settings_delete(settings);
 
