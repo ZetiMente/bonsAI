@@ -40,6 +40,15 @@ bool ModelManager::init(const std::string& modelPath, bool useGpu, bool useVisio
     // up to the Gemma 4 E2B LiteRT-LM build's compiled limit (32K).
     litert_lm_engine_settings_set_max_num_tokens(settings, 32768);
 
+    // CPU perf knobs for Pi 4 / aarch64. The Gemma 4 E2B LiteRT-LM build ships
+    // both prefill_128 and prefill_1024 signatures; use the larger chunk to
+    // amortize per-kernel overhead. F16 activations match XNNPACK's fast path.
+    // Speculative decoding leverages the bundled mtp_drafter signature to cut
+    // decode latency without a separate draft model.
+    litert_lm_engine_settings_set_prefill_chunk_size(settings, 1024);
+    litert_lm_engine_settings_set_activation_data_type(settings, 1);  // 1 = F16
+    litert_lm_engine_settings_set_enable_speculative_decoding(settings, true);
+
     m_engine = litert_lm_engine_create(settings);
     litert_lm_engine_settings_delete(settings);
 
