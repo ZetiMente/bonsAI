@@ -4,7 +4,7 @@ An edge-optimized C++ inference server with an OpenAI-compatible API for models 
 
 ## Deployment map
 
-**Status:** dormant. Binaries ship as GitHub Releases; no host runs it in production now.
+**Status:** archived to the HDD 2026-10-06. dormant. Binaries ship as GitHub Releases; no host runs it in production now.
 
 ```text
 tag v* → GitHub Actions build → GitHub Release asset bonsai-linux_<arch> → scripts/install.sh → /usr/local/bin → `bonsai model.litertlm` serves :8080
